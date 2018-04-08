@@ -1,10 +1,11 @@
-import sys
+import settings
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-ori_file = sys.argv[1]
-train_file = sys.argv[2]
-test_file = sys.argv[3]
+ori_file = settings.ORIGINAL
+train_file = settings.TRAIN
+test_file = settings.TEST
 
 ori = pd.read_csv(ori_file, header=0)
 
