@@ -7,6 +7,7 @@ TRAIN = DATA + 'my_train'
 TEST = DATA + 'my_test'
 
 TFIDF = MODEL + 'tfidf'
+LR_TFIDF = MODEL + 'lr_tfidf'
 
 TEXT_COLUMN = 'comment_text'
 DEFAULT_SCORE_COLUMN = 'toxic'
