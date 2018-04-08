@@ -1,6 +1,11 @@
+ROOT = '/Users/xinai/github/toxic-comment-classification/'
+DATA = ROOT + 'data/'
+MODEL = ROOT + 'model/'
 
-TRAIN = '/Users/xinai/github/toxic-comment-classification/data/my_train'
-TEST = '/Users/xinai/github/toxic-comment-classification/data/my_test'
+TRAIN = DATA + 'my_train'
+TEST = DATA + 'my_test'
+
+TFIDF = MODEL + 'tfidf'
 
 TEXT_COLUMN = 'comment_text'
 DEFAULT_SCORE_COLUMN = 'toxic'

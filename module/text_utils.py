@@ -38,6 +38,8 @@ def remove_stopwords(words):
     return [w for w in words if w not in sw]
 
 def prep_text(txt):
+    if isinstance(txt, str):
+        txt = txt.decode('utf-8')
     sents = sent_tokenize(txt)
     prep_words = []
     for sent in sents:
