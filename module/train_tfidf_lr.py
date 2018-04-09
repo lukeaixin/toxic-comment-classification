@@ -1,10 +1,10 @@
 import settings
+import utils
 import data_utils
 import text_utils
 
 import sys
 import time
-from datetime import timedelta
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import SGDClassifier
@@ -21,7 +21,7 @@ start = time.time()
 tfidf = TfidfVectorizer(preprocessor=text_utils.prep_text, max_df=0.95, max_features=5000)
 x_feat = tfidf.fit_transform(x_raw)
 end = time.time()
-print('Total time spent: ' + str(timedelta(end - start)))
+print('Total time spent: {}'.format(utils.seconds_to_str(end - start)))
 
 
 print('Training model')
@@ -31,7 +31,7 @@ alpha = float(sys.argv[1])
 lr = SGDClassifier(loss='log', alpha=alpha, max_iter=1000, tol=1e-3, class_weight='balanced')
 lr.fit(x_feat, y)
 end = time.time()
-print('Total time spent: ' + str(timedelta(end - start)))
+print('Total time spent: {}'.format(utils.seconds_to_str(end - start)))
 
 idx = (lr.classes_ == 1)
 
