@@ -6,11 +6,22 @@ import text_utils
 from sklearn.metrics import roc_auc_score
 from sklearn.externals import joblib
 
-print('Loading test data'):
-x_raw, y = data_utils.load_data(settings.TEST, settings.TEXT_COLUMN, settings.DEFAULT_SCORE_COLUMN)
+print('Starting script to evaluate on test set')
 
-with utils.log_message('Generating features'):
-    tfidf = joblib.load(settings.TFIDF)
+print('Loading test data and models')
+x_raw, y = data_utils.load_data(settings.TEST, settings.TEXT_COLUMN, settings.DEFAULT_SCORE_COLUMN)
+tfidf = joblib.load(settings.TFIDF)
+lr = joblib.load(settings.LR_TFIDF)
+
+with utils.log_runtime('Generating features'):
     x_feat = tfidf.transform(x_raw)
 
-utils.log_message('Complete\n')
+print('Predicting and evaluating')
+acc = lr.score(x_feat, y)
+idx = (lr.classes_ == 1)
+prob = lr.predict_proba(x_feat)[:, idx]
+auc = roc_auc_score(y, prob)
+print('Test Accuracy: {}'.format(acc))
+print('Test AUC: {}'.format(auc))
+
+print('Complete\n')
